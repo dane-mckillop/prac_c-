@@ -1,0 +1,47 @@
+C++ DEV ENVIRONMENT SETUP (Windows + VS Code)
+================================================
+
+1. INSTALL MSYS2
+   - Download from https://www.msys2.org and run installer (default path: C:\msys64)
+
+2. INSTALL GNU COMPILER (g++) VIA MSYS2
+   - Open "MSYS2 UCRT64" from Start menu (specific terminal, not PowerShell)
+   - Run: pacman -S mingw-w64-ucrt-x86_64-gcc
+   - Confirm/accept prompts, let it finish installing
+
+3. ADD COMPILER TO WINDOWS PATH
+   - Verify file exists first (in PowerShell):
+       dir C:\msys64\ucrt64\bin\g++.exe
+   - Add to User PATH via PowerShell (more reliable than the GUI):
+       [System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path","User") + ";C:\msys64\ucrt64\bin", "User")
+   - Fully close ALL PowerShell / VS Code windows, then reopen (PATH changes only apply to new sessions)
+
+4. VERIFY
+   - In a fresh terminal:
+       g++ --version
+   - Should print a GCC version banner, not an error
+
+5. VS CODE EXTENSION
+   - Install "C/C++" by Microsoft (ms-vscode.cpptools) from the Extensions panel
+
+6. HELLO WORLD
+   - Create main.cpp:
+
+       #include <iostream>
+
+       int main() {
+           std::cout << "Hello, World!" << std::endl;
+           return 0;
+       }
+
+   - Compile and run:
+       g++ main.cpp -o main.exe
+       .\main.exe
+
+TROUBLESHOOTING NOTES
+----------------------
+- If "g++ not recognized" after adding to PATH: check it actually saved with
+    [System.Environment]::GetEnvironmentVariable("Path","User")
+  The GUI (Edit Environment Variables dialog) can silently fail to save if dialogs
+  aren't all confirmed with OK. The PowerShell SetEnvironmentVariable command is more reliable.
+- PATH changes never apply to already-open terminals — always open a brand new window.

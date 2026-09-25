@@ -1,0 +1,25 @@
+Minimal C++ dev container
+
+Vendor-neutral C++ toolchain in a container: Debian + gcc/clang + clangd + cmake + gdb + neovim. No proprietary editor, no telemetry, nothing you can't keep running forever off a tarball.
+
+Build and run
+docker build -t cppdev .
+docker run -it --name cppdev -v "$PWD/workspace:/workspace" cppdev bash
+
+Reattach later with either:
+
+docker start -ai cppdev          # resume the same shell
+docker exec -it cppdev bash      # open an additional shell into a running container
+First-time Neovim setup (inside the container)
+mkdir -p ~/.config/nvim
+cp /workspace/nvim/init.lua ~/.config/nvim/init.lua
+nvim   # first launch installs plugins automatically via lazy.nvim
+Build and run the sample project
+cd /workspace
+mkdir build && cd build
+cmake ..
+make
+./hello
+ln -sf build/compile_commands.json ..   # so clangd finds it from the project root
+Debug
+gdb ./build/hello

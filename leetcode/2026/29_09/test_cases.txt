@@ -1,0 +1,7 @@
+Input: grid = [["(","(","("],[")","(",")"],["(","(",")"],["(","(",")"]]
+Output: true
+Expected: true
+
+Input: grid = [[")",")"],["(","("]]
+Output: false
+Expected: false

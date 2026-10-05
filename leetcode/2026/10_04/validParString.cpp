@@ -10,7 +10,7 @@ private:
 
     bool solve(const string& s, int i, int open) {
         if (open < 0) return false;
-        if (i == s.size()) return open == 0;
+        if (i == s.size()) return open == 0;             // base case: true if all open are closed
 
         if (memo[i][open] != -1) return memo[i][open];   // already solved
 

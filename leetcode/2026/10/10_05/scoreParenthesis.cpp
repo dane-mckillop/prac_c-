@@ -12,7 +12,7 @@ public:
     }
 
 private:
-    void scanParenthesis(string& s, int& i, int& openPar, int& score) {
+    void scanParenthesis(string& s, int i, int openPar, int& score) {
         // Base
         if (i >= s.size()) {
             return;
